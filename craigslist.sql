@@ -20,17 +20,27 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name TEXT NOT NULL,
     last_name TEXT,
-    username VARCHAR(15) UNIQUE NOT NULL,
-    preferred_region INT REFERENCES region
+    username VARCHAR(15) UNIQUE NOT NULL
 );
 
-INSERT INTO users (first_name, last_name, username, preferred_region)
+INSERT INTO users (first_name, last_name, username)
 VALUES
-    ('Oliver', 'Chang', 'oliverstudent2', 1),
-    ('Bob', 'Smith', 'bobbyboi', 6),
-    ('Karen', 'Smith', 'karengirl', 6),
-    ('Taylor', 'Swift', 'taytay89', 9),
-    ('Stephanie', 'Andalon', 'therealstef', 3);
+    ('Oliver', 'Chang', 'oliverstudent'),
+    ('Bob', 'Smith', 'bobbyboi'),
+    ('Karen', 'Smith', 'karengirl'),
+    ('Taylor', 'Swift', 'taytay89'),
+    ('Anabel', 'Zhang', 'ronlife'),
+    ('Viviana', 'Andalon', 'therealviv');
+
+CREATE TABLE region_preferences( 
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users,
+    region_id INT REFERENCES region
+);
+
+INSERT INTO region_preferences (user_id, region_id)
+VALUES
+    (1, 1), (2, 6), (3, 6), (4, 8), (5, 3);
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
